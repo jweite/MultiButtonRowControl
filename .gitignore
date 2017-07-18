@@ -1,0 +1,18 @@
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+# dependencies
+
+# testing
+
+# production
+/MultiButtonColControl2/bin
+/WindowsFormsApplication1/bin
+/WindowsFormsControlLibrary1/bin
+
+# intermediate
+/MultiButtonColControl2/obj
+/WindowsFormsApplication1/obj
+/WindowsFormsControlLibrary1/obj
+
+# misc
+
