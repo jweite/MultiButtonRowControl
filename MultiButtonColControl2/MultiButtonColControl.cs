@@ -29,6 +29,10 @@ namespace MultiButtonColControl2
 
         public event EventHandler Click;
 
+        bool bShowArrowButtons = true;
+
+        bool bShowScrollbar = true;
+
         public MultiButtonColControl()
         {
             InitializeComponent();
@@ -357,5 +361,98 @@ namespace MultiButtonColControl2
                 }
             }
         }
+
+        // BUG: ShowArrows and ShowScrollbar interact in an unexpected way.  With the tester add buttons, then Toggle Scrollbar,
+        //  Toggle Arrows, Toggle Scrollbar, Toggle Arrows: button rows seem offset by one...
+        //  For now I only plan to use these as design-time settings.  BUT...
+
+        [Browsable(true)]
+        [Category("Layout")]
+        [Description("Enables/disables the presence of the two arrow buttons")]
+        public bool ShowArrowButtons
+        {
+            get
+            {
+                System.Diagnostics.Debug.WriteLine("mbcc ShowArrowButtons get: " + bShowArrowButtons);
+                return bShowArrowButtons;
+            }
+            // Stores the selected value in the private variable colBColor, and 
+            // updates the backcolor of the label control lblDisplay.
+            set
+            {
+                bShowArrowButtons = value;
+                System.Diagnostics.Debug.WriteLine("mbcc ShowArrowButtons get: " + bShowArrowButtons);
+                if (bShowArrowButtons == false)
+                {
+                    tlpOuter.Controls.Remove(btnUp);
+                    tlpOuter.Controls.Remove(btnDown);
+                    tlpOuter.SetRow(flpInner, 0);
+                    tlpOuter.SetRowSpan(flpInner, 3);
+                }
+                else
+                {
+                    tlpOuter.SetRowSpan(flpInner, 1);
+                    tlpOuter.SetRow(flpInner, 1);
+                    if (bShowScrollbar == true)
+                    {
+                        tlpOuter.Controls.Add(btnUp, 1, 0);
+                        tlpOuter.Controls.Add(btnDown, 1, 2);
+                    }
+                    else
+                    {
+                        tlpOuter.Controls.Add(btnUp, 0, 0);
+                        tlpOuter.Controls.Add(btnDown, 0, 2);
+                        tlpOuter.SetColumnSpan(btnUp, 2);
+                        tlpOuter.SetColumnSpan(btnDown, 2);
+
+                    }
+                }
+            }
+        }
+
+        [Browsable(true)]
+        [Category("Layout")]
+        [Description("Enables/disables the presence of the scrollbar")]
+        public bool ShowScrollbar
+        {
+            get
+            {
+                return bShowScrollbar;
+            }
+            // Stores the selected value in the private variable colBColor, and 
+            // updates the backcolor of the label control lblDisplay.
+            set
+            {
+                bShowScrollbar = value;
+                if (bShowScrollbar == false)
+                {
+                    tlpOuter.Controls.Remove(scrollbar);
+                    if (bShowArrowButtons == true)
+                    {
+                        tlpOuter.SetColumn(btnUp, 0);
+                        tlpOuter.SetColumn(btnDown, 0);
+                        tlpOuter.SetColumnSpan(btnUp, 2);
+                        tlpOuter.SetColumnSpan(btnDown, 2);
+                    }
+                    tlpOuter.SetColumn(flpInner, 0);
+                    tlpOuter.SetColumnSpan(flpInner, 2);
+                }
+                else
+                {
+                    if (bShowArrowButtons == true)
+                    {
+                        tlpOuter.SetColumnSpan(btnUp, 1);
+                        tlpOuter.SetColumnSpan(btnDown, 1);
+                        tlpOuter.SetColumn(btnUp, 1);
+                        tlpOuter.SetColumn(btnDown, 1);
+                    }
+                    tlpOuter.SetColumnSpan(flpInner, 1);
+                    tlpOuter.SetColumn(flpInner, 1);
+
+                    tlpOuter.Controls.Add(scrollbar, 0, 1);
+                }
+            }
+        }
+
     }
 }

@@ -53,5 +53,14 @@ namespace WindowsFormsApplication1
             multiButtonRowControl1.selectLogicalButton(0, true);
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            multiButtonColControl1.ShowArrowButtons = !multiButtonColControl1.ShowArrowButtons;
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            multiButtonColControl1.ShowScrollbar = !multiButtonColControl1.ShowScrollbar;
+        }
     }
 }
