@@ -62,5 +62,10 @@ namespace WindowsFormsApplication1
         {
             multiButtonColControl1.ShowScrollbar = !multiButtonColControl1.ShowScrollbar;
         }
+
+        private void btnToggleAlpha_Click(object sender, EventArgs e)
+        {
+            multiButtonColControl1.ShowAlphaButtons = !multiButtonColControl1.ShowAlphaButtons;
+        }
     }
 }

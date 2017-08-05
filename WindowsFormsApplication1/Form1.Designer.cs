@@ -39,13 +39,14 @@
             this.btnSelectZero = new System.Windows.Forms.Button();
             this.btnToggleArrows = new System.Windows.Forms.Button();
             this.btnToggleScrollbar = new System.Windows.Forms.Button();
+            this.btnToggleAlpha = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(434, 141);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(141, 28);
             this.button1.TabIndex = 1;
@@ -58,7 +59,7 @@
             this.multiButtonRowControl1.ButtonBackColor = System.Drawing.SystemColors.Control;
             this.multiButtonRowControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.multiButtonRowControl1.Location = new System.Drawing.Point(0, 0);
-            this.multiButtonRowControl1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.multiButtonRowControl1.Margin = new System.Windows.Forms.Padding(5);
             this.multiButtonRowControl1.Name = "multiButtonRowControl1";
             this.multiButtonRowControl1.Size = new System.Drawing.Size(1713, 92);
             this.multiButtonRowControl1.TabIndex = 2;
@@ -66,8 +67,8 @@
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(434, 241);
-            this.btnClear.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnClear.Location = new System.Drawing.Point(434, 223);
+            this.btnClear.Margin = new System.Windows.Forms.Padding(4);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(141, 28);
             this.btnClear.TabIndex = 3;
@@ -100,8 +101,9 @@
             this.multiButtonColControl1.ButtonBackColor = System.Drawing.Color.Maroon;
             this.multiButtonColControl1.Dock = System.Windows.Forms.DockStyle.Left;
             this.multiButtonColControl1.Location = new System.Drawing.Point(0, 92);
-            this.multiButtonColControl1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.multiButtonColControl1.Margin = new System.Windows.Forms.Padding(5);
             this.multiButtonColControl1.Name = "multiButtonColControl1";
+            this.multiButtonColControl1.ShowAlphaButtons = false;
             this.multiButtonColControl1.ShowArrowButtons = true;
             this.multiButtonColControl1.ShowScrollbar = true;
             this.multiButtonColControl1.Size = new System.Drawing.Size(325, 550);
@@ -131,8 +133,8 @@
             // btnSelectZero
             // 
             this.btnSelectZero.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSelectZero.Location = new System.Drawing.Point(434, 191);
-            this.btnSelectZero.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSelectZero.Location = new System.Drawing.Point(434, 182);
+            this.btnSelectZero.Margin = new System.Windows.Forms.Padding(4);
             this.btnSelectZero.Name = "btnSelectZero";
             this.btnSelectZero.Size = new System.Drawing.Size(141, 28);
             this.btnSelectZero.TabIndex = 9;
@@ -142,7 +144,7 @@
             // 
             // btnToggleArrows
             // 
-            this.btnToggleArrows.Location = new System.Drawing.Point(434, 291);
+            this.btnToggleArrows.Location = new System.Drawing.Point(434, 264);
             this.btnToggleArrows.Name = "btnToggleArrows";
             this.btnToggleArrows.Size = new System.Drawing.Size(141, 31);
             this.btnToggleArrows.TabIndex = 10;
@@ -152,7 +154,7 @@
             // 
             // btnToggleScrollbar
             // 
-            this.btnToggleScrollbar.Location = new System.Drawing.Point(434, 344);
+            this.btnToggleScrollbar.Location = new System.Drawing.Point(434, 308);
             this.btnToggleScrollbar.Name = "btnToggleScrollbar";
             this.btnToggleScrollbar.Size = new System.Drawing.Size(141, 31);
             this.btnToggleScrollbar.TabIndex = 11;
@@ -160,11 +162,22 @@
             this.btnToggleScrollbar.UseVisualStyleBackColor = true;
             this.btnToggleScrollbar.Click += new System.EventHandler(this.button2_Click_1);
             // 
+            // btnToggleAlpha
+            // 
+            this.btnToggleAlpha.Location = new System.Drawing.Point(434, 352);
+            this.btnToggleAlpha.Name = "btnToggleAlpha";
+            this.btnToggleAlpha.Size = new System.Drawing.Size(141, 31);
+            this.btnToggleAlpha.TabIndex = 12;
+            this.btnToggleAlpha.Text = "Toggle Alpha";
+            this.btnToggleAlpha.UseVisualStyleBackColor = true;
+            this.btnToggleAlpha.Click += new System.EventHandler(this.btnToggleAlpha_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1713, 642);
+            this.Controls.Add(this.btnToggleAlpha);
             this.Controls.Add(this.btnToggleScrollbar);
             this.Controls.Add(this.btnToggleArrows);
             this.Controls.Add(this.btnSelectZero);
@@ -176,7 +189,7 @@
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.multiButtonRowControl1);
             this.Controls.Add(this.button1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -198,6 +211,7 @@
         private System.Windows.Forms.Button btnSelectZero;
         private System.Windows.Forms.Button btnToggleArrows;
         private System.Windows.Forms.Button btnToggleScrollbar;
+        private System.Windows.Forms.Button btnToggleAlpha;
     }
 }
 

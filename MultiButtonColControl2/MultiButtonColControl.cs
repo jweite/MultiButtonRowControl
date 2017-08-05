@@ -33,10 +33,12 @@ namespace MultiButtonColControl2
 
         bool bShowScrollbar = true;
 
+        bool bShowAlphaButtons = false;
+
         public MultiButtonColControl()
         {
             InitializeComponent();
-            scrollbar.Minimum =  scrollbar.Maximum = 0;
+            scrollbar.Minimum = scrollbar.Maximum = 0;
         }
 
         public void addButton(String text)
@@ -58,7 +60,8 @@ namespace MultiButtonColControl2
 
             int nPhysicalButtonsProposed = physicalButtons.Count + 1;
             int newButtonHeight = (containerInnerHeight / nPhysicalButtonsProposed) - buttonMarginWidth;
-            if (newButtonHeight >= minButtonHeight || nPhysicalButtonsProposed == 1) {
+            if (newButtonHeight >= minButtonHeight || nPhysicalButtonsProposed == 1)
+            {
                 b.Text = text;
                 b.Tag = tag;
                 b.Font = new System.Drawing.Font("Microsoft Sans Serif", fontSize, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -66,9 +69,10 @@ namespace MultiButtonColControl2
                 physicalButtons.Add(b);
                 flpInner.Controls.Add(b);
 
-                foreach (Button b2 in physicalButtons) {
+                foreach (Button b2 in physicalButtons)
+                {
                     b2.Height = newButtonHeight;
-                    b2.Width = flpInner.Width;
+                    b2.Width = flpInner.Width - (flpInner.Margin.Left + flpInner.Margin.Right);
                 }
 
                 if (currentLogicalButton >= 0 && logicalButtonIndex == currentLogicalButton)
@@ -210,7 +214,7 @@ namespace MultiButtonColControl2
             {
                 return;
             }
-            
+
             int proposedButtonHeight = (containerUsableHeight / nProposedButtons) - buttonMarginHeight;
 
             if (proposedButtonHeight < minButtonHeight)
@@ -231,7 +235,8 @@ namespace MultiButtonColControl2
                 topmostLogicalButton = currentLogicalButton;
             }
 
-            if (currentLogicalButton >= 0 && currentLogicalButton >= topmostLogicalButton + nProposedButtons) {
+            if (currentLogicalButton >= 0 && currentLogicalButton >= topmostLogicalButton + nProposedButtons)
+            {
                 topmostLogicalButton = (currentLogicalButton - nProposedButtons) + 1;
             }
 
@@ -241,18 +246,20 @@ namespace MultiButtonColControl2
             }
             scrollbar.Value = topmostLogicalButton;
 
-            for (int i = 0; i < nProposedButtons; ++i) {
+            for (int i = 0; i < nProposedButtons; ++i)
+            {
                 b = new Button();
                 b.BackColor = buttonBackColor;
                 b.Text = logicalButtons[i + topmostLogicalButton].text;
                 b.Tag = logicalButtons[i + topmostLogicalButton].tag;
                 b.Font = new System.Drawing.Font("Microsoft Sans Serif", fontSize, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                 b.Height = proposedButtonHeight;
-                b.Width = flpInner.Width;
+                b.Width = flpInner.Width - (flpInner.Margin.Left + flpInner.Margin.Right);
                 b.Click += new System.EventHandler(this.button_Click);
                 physicalButtons.Add(b);
                 flpInner.Controls.Add(b);
-                if (currentLogicalButton >= 0 && i + topmostLogicalButton == currentLogicalButton) {
+                if (currentLogicalButton >= 0 && i + topmostLogicalButton == currentLogicalButton)
+                {
                     b.BackColor = SystemColors.Highlight;
                 }
             }
@@ -269,11 +276,13 @@ namespace MultiButtonColControl2
             int i = 0;
             foreach (Button b in physicalButtons)
             {
-                if (b == (Button)sender) {
+                if (b == (Button)sender)
+                {
                     b.BackColor = SystemColors.Highlight;
                     currentLogicalButton = i + topmostLogicalButton;
                 }
-                else {
+                else
+                {
                     b.BackColor = buttonBackColor;
                 }
                 ++i;
@@ -285,7 +294,8 @@ namespace MultiButtonColControl2
             }
         }
 
-        public void selectLogicalButton(int index, bool throwClickEvent) {
+        public void selectLogicalButton(int index, bool throwClickEvent)
+        {
             if (index >= 0 && index < logicalButtons.Count)
             {
 
@@ -336,7 +346,7 @@ namespace MultiButtonColControl2
                 selectLogicalButton(currentLogicalButton - 1, throwClickEvent);
             }
         }
-        
+
         [Browsable(true)]
         [Category("Appearance")]
         [Description("Gets and sets the background color of the component's buttons")]
@@ -373,7 +383,6 @@ namespace MultiButtonColControl2
         {
             get
             {
-                System.Diagnostics.Debug.WriteLine("mbcc ShowArrowButtons get: " + bShowArrowButtons);
                 return bShowArrowButtons;
             }
             // Stores the selected value in the private variable colBColor, and 
@@ -381,32 +390,7 @@ namespace MultiButtonColControl2
             set
             {
                 bShowArrowButtons = value;
-                System.Diagnostics.Debug.WriteLine("mbcc ShowArrowButtons get: " + bShowArrowButtons);
-                if (bShowArrowButtons == false)
-                {
-                    tlpOuter.Controls.Remove(btnUp);
-                    tlpOuter.Controls.Remove(btnDown);
-                    tlpOuter.SetRow(flpInner, 0);
-                    tlpOuter.SetRowSpan(flpInner, 3);
-                }
-                else
-                {
-                    tlpOuter.SetRowSpan(flpInner, 1);
-                    tlpOuter.SetRow(flpInner, 1);
-                    if (bShowScrollbar == true)
-                    {
-                        tlpOuter.Controls.Add(btnUp, 1, 0);
-                        tlpOuter.Controls.Add(btnDown, 1, 2);
-                    }
-                    else
-                    {
-                        tlpOuter.Controls.Add(btnUp, 0, 0);
-                        tlpOuter.Controls.Add(btnDown, 0, 2);
-                        tlpOuter.SetColumnSpan(btnUp, 2);
-                        tlpOuter.SetColumnSpan(btnDown, 2);
-
-                    }
-                }
+                redoLayout();
             }
         }
 
@@ -424,35 +408,91 @@ namespace MultiButtonColControl2
             set
             {
                 bShowScrollbar = value;
-                if (bShowScrollbar == false)
-                {
-                    tlpOuter.Controls.Remove(scrollbar);
-                    if (bShowArrowButtons == true)
-                    {
-                        tlpOuter.SetColumn(btnUp, 0);
-                        tlpOuter.SetColumn(btnDown, 0);
-                        tlpOuter.SetColumnSpan(btnUp, 2);
-                        tlpOuter.SetColumnSpan(btnDown, 2);
-                    }
-                    tlpOuter.SetColumn(flpInner, 0);
-                    tlpOuter.SetColumnSpan(flpInner, 2);
-                }
-                else
-                {
-                    if (bShowArrowButtons == true)
-                    {
-                        tlpOuter.SetColumnSpan(btnUp, 1);
-                        tlpOuter.SetColumnSpan(btnDown, 1);
-                        tlpOuter.SetColumn(btnUp, 1);
-                        tlpOuter.SetColumn(btnDown, 1);
-                    }
-                    tlpOuter.SetColumnSpan(flpInner, 1);
-                    tlpOuter.SetColumn(flpInner, 1);
-
-                    tlpOuter.Controls.Add(scrollbar, 0, 1);
-                }
+                redoLayout();
+            }
+        }
+        [Browsable(true)]
+        [Category("Layout")]
+        [Description("Enables/disables the presence of the alphabet buttons")]
+        public bool ShowAlphaButtons
+        {
+            get
+            {
+                return bShowAlphaButtons;
+            }
+            // Stores the selected value in the private variable colBColor, and 
+            // updates the backcolor of the label control lblDisplay.
+            set
+            {
+                bShowAlphaButtons = value;
+                redoLayout();
             }
         }
 
+        private void redoLayout()
+        {
+            int mainCol = 0;
+            int mainRow = 0;
+            int mainColSpan = 1;
+            int mainRowSpan = 1;
+
+            for (int i = tlpOuter.Controls.Count-1; i >=0; --i)
+            {
+                tlpOuter.Controls.Remove(tlpOuter.Controls[i]);
+            }
+
+            if (bShowScrollbar)
+            {
+                tlpOuter.Controls.Add(scrollbar, 0, 1);
+                mainCol = 1;
+            }
+            else
+            {
+                mainCol = 0;
+                mainColSpan = 2;
+            }
+
+            if (bShowArrowButtons)
+            {
+                int arrowCol = (bShowScrollbar) ? 1 : 0;
+                int arrowSpan = (bShowScrollbar) ? 1 : 2;
+                tlpOuter.Controls.Add(btnUp, arrowCol, 0);
+                tlpOuter.Controls.Add(btnDown, arrowCol, 2);
+                if (!bShowAlphaButtons)
+                {
+                    ++arrowSpan;
+                }
+                tlpOuter.SetColumnSpan(btnUp, arrowSpan);
+                tlpOuter.SetColumnSpan(btnDown, arrowSpan);
+
+                mainRow = 1;
+            }
+            else
+            {
+                mainRowSpan = 0;
+                mainRowSpan = 3;
+            }
+
+            if (bShowAlphaButtons)
+            {
+                tlpOuter.Controls.Add(flpAlphaButtons, 2, 0);
+                tlpOuter.SetRowSpan(flpAlphaButtons, 3);
+            }
+            else
+            {
+                mainColSpan += 1;
+            }
+
+            System.Diagnostics.Debug.WriteLine("mainCol: " + mainCol);
+            System.Diagnostics.Debug.WriteLine("mainRow: " + mainRow);
+            System.Diagnostics.Debug.WriteLine("mainColSpan: " + mainColSpan);
+            System.Diagnostics.Debug.WriteLine("mainRowSpan: " + mainRowSpan);
+            
+            tlpOuter.Controls.Add(flpInner, mainCol, mainRow);
+            tlpOuter.SetColumnSpan(flpInner, mainColSpan);
+            tlpOuter.SetRowSpan(flpInner, mainRowSpan);
+
+            MultiButtonColControl_Resize(null, null);
+        }
     }
 }
