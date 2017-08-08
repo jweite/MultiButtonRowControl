@@ -119,12 +119,15 @@
             // 
             // btnAlpha
             // 
-            this.btnAlpha.Location = new System.Drawing.Point(3, 3);
+            this.btnAlpha.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAlpha.Location = new System.Drawing.Point(0, 0);
+            this.btnAlpha.Margin = new System.Windows.Forms.Padding(0);
             this.btnAlpha.Name = "btnAlpha";
-            this.btnAlpha.Size = new System.Drawing.Size(24, 23);
+            this.btnAlpha.Size = new System.Drawing.Size(24, 20);
             this.btnAlpha.TabIndex = 0;
-            this.btnAlpha.Text = "A";
+            this.btnAlpha.Text = "0";
             this.btnAlpha.UseVisualStyleBackColor = true;
+            this.btnAlpha.Click += new System.EventHandler(this.btnAlpha_Click);
             // 
             // MultiButtonColControl
             // 

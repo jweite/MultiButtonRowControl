@@ -35,10 +35,34 @@ namespace MultiButtonColControl2
 
         bool bShowAlphaButtons = false;
 
+        const int MIN_ALPHA_BUTTON_HEIGHT = 20;     // Based on font used for this button.
+
         public MultiButtonColControl()
         {
             InitializeComponent();
             scrollbar.Minimum = scrollbar.Maximum = 0;
+
+            btnAlpha.Height = (flpAlphaButtons.Height - (flpAlphaButtons.Margin.Top + flpAlphaButtons.Margin.Bottom)) / 27;
+            btnAlpha.Visible = false;
+
+            for (char c = 'A'; c <= 'Z'; ++c)
+            {
+                // Clone the designed zero button
+                Button b = new Button();
+                b.Visible = false;
+                b.BackColor = btnAlpha.BackColor;
+                b.ForeColor = btnAlpha.ForeColor;
+                b.Text = new string(c, 1);
+                b.Width = btnAlpha.Width;
+                b.Height = btnAlpha.Height;
+                b.Padding = new Padding(0);
+                b.Margin = new Padding(0);
+                b.Font = new Font(btnAlpha.Font, FontStyle.Regular);
+                b.Click += new System.EventHandler(this.btnAlpha_Click);
+
+                flpAlphaButtons.Controls.Add(b);
+            }
+
         }
 
         public void addButton(String text)
@@ -87,6 +111,21 @@ namespace MultiButtonColControl2
             {
                 scrollbar.Maximum = logicalButtonIndex - physicalButtons.Count;
             }
+
+            // Make alpha nav button for this button visibles
+            string firstChar = text.Substring(0, 1).ToUpper();
+            string alphaButtonText = (firstChar.CompareTo("A") <= 0 || firstChar.CompareTo("Z") >= 0) ? "0" : firstChar;
+            foreach (Control ctl in flpAlphaButtons.Controls)
+            {
+                // if typeof(ctl) != Button then next...
+
+                Button b2 = (Button)ctl;    
+                if (b2.Text == alphaButtonText)
+                {
+                    b2.Visible = true;
+                    break;
+                }
+            }
         }
 
         public void clearButtons()
@@ -112,6 +151,13 @@ namespace MultiButtonColControl2
 
             logicalButtonIndex = 0;
 
+            foreach (Control ctl in flpAlphaButtons.Controls)
+            {
+                // if typeof(ctl) != Button then next...
+
+                Button b2 = (Button)ctl;
+                b2.Visible = true;
+            }
         }
 
         private void btnUp_Click(object sender, EventArgs e)
@@ -267,6 +313,21 @@ namespace MultiButtonColControl2
             if (logicalButtonIndex > physicalButtons.Count)
             {
                 scrollbar.Maximum = logicalButtonIndex - physicalButtons.Count;
+            }
+
+            // Resize alpha buttons
+            int alphaButtonHeight = (flpAlphaButtons.Height - (flpAlphaButtons.Margin.Top + flpAlphaButtons.Margin.Bottom)) / 27;
+            if (alphaButtonHeight < MIN_ALPHA_BUTTON_HEIGHT)
+            {
+                alphaButtonHeight = MIN_ALPHA_BUTTON_HEIGHT;
+            }
+
+            foreach (Control ctl in flpAlphaButtons.Controls)
+            {
+                // if typeof(ctl) != Button then next...
+
+                Button b2 = (Button)ctl;
+                b2.Height = alphaButtonHeight;
             }
 
         }
@@ -493,6 +554,11 @@ namespace MultiButtonColControl2
             tlpOuter.SetRowSpan(flpInner, mainRowSpan);
 
             MultiButtonColControl_Resize(null, null);
+        }
+
+        private void btnAlpha_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
