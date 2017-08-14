@@ -314,6 +314,7 @@ namespace MultiButtonColControl2
             {
                 scrollbar.Maximum = logicalButtonIndex - physicalButtons.Count;
             }
+            scrollbar.LargeChange = physicalButtons.Count;
 
             // Resize alpha buttons
             int alphaButtonHeight = (flpAlphaButtons.Height - (flpAlphaButtons.Margin.Top + flpAlphaButtons.Margin.Bottom)) / 27;
@@ -355,7 +356,7 @@ namespace MultiButtonColControl2
             }
         }
 
-        public void selectLogicalButton(int index, bool throwClickEvent)
+        public void selectLogicalButton(int index, bool bThrowClickEvent, bool bTryToMakeTopButton)
         {
             if (index >= 0 && index < logicalButtons.Count)
             {
@@ -363,28 +364,35 @@ namespace MultiButtonColControl2
                 // Set the button
                 currentLogicalButton = index;
 
-                // Try to force the button visible
                 if (physicalButtons.Count == 0)
                 {
                     return;
                 }
-                if (currentLogicalButton < topmostLogicalButton)
+
+                // Force the button visible
+                if (currentLogicalButton < topmostLogicalButton || bTryToMakeTopButton)
                 {
                     topmostLogicalButton = currentLogicalButton;
-                    scrollbar.Value = topmostLogicalButton;
+                }
+                if (topmostLogicalButton > logicalButtons.Count - physicalButtons.Count)
+                {
+                    topmostLogicalButton = logicalButtons.Count - physicalButtons.Count;
                 }
                 if (currentLogicalButton >= topmostLogicalButton + physicalButtons.Count)
                 {
                     topmostLogicalButton = (currentLogicalButton + 1) - physicalButtons.Count;
-                    scrollbar.Value = topmostLogicalButton;
                 }
+                // Else it's already visible
+
+
+                scrollbar.Value = topmostLogicalButton;
 
                 // Update the highlights on all buttons 
                 refreshButtons();
 
                 // Force a click event for this button.
                 Button buttonClicked = physicalButtons[currentLogicalButton - topmostLogicalButton];
-                if (throwClickEvent == true && Click != null)
+                if (bThrowClickEvent == true && Click != null)
                 {
                     EventArgs e = new EventArgs();
                     Click(buttonClicked, e);
@@ -396,7 +404,7 @@ namespace MultiButtonColControl2
         {
             if (currentLogicalButton < logicalButtons.Count - 1)
             {
-                selectLogicalButton(currentLogicalButton + 1, throwClickEvent);
+                selectLogicalButton(currentLogicalButton + 1, throwClickEvent, false);
             }
         }
 
@@ -404,7 +412,7 @@ namespace MultiButtonColControl2
         {
             if (currentLogicalButton > 0)
             {
-                selectLogicalButton(currentLogicalButton - 1, throwClickEvent);
+                selectLogicalButton(currentLogicalButton - 1, throwClickEvent, false);
             }
         }
 
@@ -558,7 +566,21 @@ namespace MultiButtonColControl2
 
         private void btnAlpha_Click(object sender, EventArgs e)
         {
+            Button alphaButton = (Button)sender;
+            string letter = alphaButton.Text;
+            if (letter == "0")
+            {
+                selectLogicalButton(0, false, true);
+                return;
+            }
 
+            for (int i = 0; i < logicalButtons.Count; ++i)
+            {
+                if (logicalButtons[i].text.StartsWith(letter)) {
+                    selectLogicalButton(i, false, true);
+                    return;
+                }
+            }
         }
     }
 }

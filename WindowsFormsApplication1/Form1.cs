@@ -24,8 +24,9 @@ namespace WindowsFormsApplication1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            multiButtonRowControl1.addButton(String.Format("Button {0}", buttonNo++), String.Format("Tag {0}", buttonNo));
-            multiButtonColControl1.addButton(String.Format("Button {0}", buttonNo++), String.Format("Tag {0}", buttonNo));
+            string s = ((char)(65 + buttonNo)).ToString();
+            multiButtonRowControl1.addButton(String.Format("{0} {1}", s, buttonNo++), String.Format("Tag {0}", buttonNo));
+            multiButtonColControl1.addButton(String.Format("{0} {1}", s, buttonNo++), String.Format("Tag {0}", buttonNo));
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -49,7 +50,7 @@ namespace WindowsFormsApplication1
 
         private void btnSelectZero_Click(object sender, EventArgs e)
         {
-            multiButtonColControl1.selectLogicalButton(0, true);
+            multiButtonColControl1.selectLogicalButton(0, true, false);
             multiButtonRowControl1.selectLogicalButton(0, true);
         }
 
