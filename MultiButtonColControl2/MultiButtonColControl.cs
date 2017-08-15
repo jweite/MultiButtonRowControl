@@ -567,8 +567,18 @@ namespace MultiButtonColControl2
         private void btnAlpha_Click(object sender, EventArgs e)
         {
             Button alphaButton = (Button)sender;
-            string letter = alphaButton.Text;
-            if (letter == "0")
+            string letter = alphaButton.Text.ToUpper();
+            selectByName(letter);
+            if (letter.CompareTo("A") < 0 || letter.CompareTo("Z") > 0)
+            {
+                letter = "";
+            }
+            selectByName(letter);
+        }
+
+        public void selectByName(string name)
+        {
+            if (name == "")
             {
                 selectLogicalButton(0, false, true);
                 return;
@@ -576,11 +586,13 @@ namespace MultiButtonColControl2
 
             for (int i = 0; i < logicalButtons.Count; ++i)
             {
-                if (logicalButtons[i].text.StartsWith(letter)) {
+                if (logicalButtons[i].text.ToUpper().StartsWith(name.ToUpper()))
+                {
                     selectLogicalButton(i, false, true);
                     return;
                 }
             }
+
         }
     }
 }
