@@ -37,6 +37,36 @@ namespace MultiButtonColControl2
 
         const int MIN_ALPHA_BUTTON_HEIGHT = 20;     // Based on font used for this button.
 
+        public string LastSelectedButtonText
+        {
+            get
+            {
+                if (currentLogicalButton >= 0)
+                {
+                    return logicalButtons[currentLogicalButton].text;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        public object LastSelectedButtonTag
+        {
+            get
+            {
+                if (currentLogicalButton >= 0)
+                {
+                    return logicalButtons[currentLogicalButton].tag;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
         public MultiButtonColControl()
         {
             InitializeComponent();
