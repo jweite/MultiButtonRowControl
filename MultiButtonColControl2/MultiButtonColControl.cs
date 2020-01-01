@@ -139,7 +139,7 @@ namespace MultiButtonColControl2
 
             if (logicalButtonIndex > physicalButtons.Count)
             {
-                scrollbar.Maximum = logicalButtonIndex - physicalButtons.Count;
+                scrollbar.Maximum = logicalButtonIndex - 1 /* - physicalButtons.Count*/;
             }
 
             // Make alpha nav button for this button visibles
@@ -342,7 +342,7 @@ namespace MultiButtonColControl2
 
             if (logicalButtonIndex > physicalButtons.Count)
             {
-                scrollbar.Maximum = logicalButtonIndex - physicalButtons.Count;
+                scrollbar.Maximum = logicalButtonIndex - 1 /* - physicalButtons.Count*/;
             }
             scrollbar.LargeChange = physicalButtons.Count;
 
