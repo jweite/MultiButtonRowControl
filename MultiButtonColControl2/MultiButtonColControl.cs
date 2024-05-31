@@ -35,7 +35,11 @@ namespace MultiButtonColControl2
 
         bool bShowAlphaButtons = false;
 
+        bool bShowLogicalButtonNumberBadge = false;
+
         const int MIN_ALPHA_BUTTON_HEIGHT = 20;     // Based on font used for this button.
+
+        Color[] badgeColors;
 
         public string LastSelectedButtonText
         {
@@ -70,6 +74,12 @@ namespace MultiButtonColControl2
         public MultiButtonColControl()
         {
             InitializeComponent();
+
+            badgeColors = new Color[3];
+            badgeColors[0] = Color.Yellow;
+            badgeColors[1] = Color.DeepPink;
+            badgeColors[2] = Color.LawnGreen;
+
             scrollbar.Minimum = scrollbar.Maximum = 0;
 
             btnAlpha.Height = (flpAlphaButtons.Height - (flpAlphaButtons.Margin.Top + flpAlphaButtons.Margin.Bottom)) / 27;
@@ -108,6 +118,10 @@ namespace MultiButtonColControl2
             logicalButtons.Add(logicalButtonIndex, logicalButton);
 
             Button b = new Button();
+            if (this.bShowLogicalButtonNumberBadge) {
+                Adorner.AddBadgeTo(b, (logicalButtonIndex + 1).ToString(), badgeColors[logicalButtonIndex % badgeColors.Length]);
+            }
+
             b.BackColor = buttonBackColor;
             int buttonMarginWidth = b.Margin.Top + b.Margin.Bottom;
             int containerInnerHeight = (flpInner.Height - (flpInner.Margin.Top + flpInner.Margin.Bottom));
@@ -171,6 +185,7 @@ namespace MultiButtonColControl2
             foreach (Button b in physicalButtons)
             {
                 b.Click -= this.button_Click;
+                Adorner.RemoveBadgeFrom(b);
             }
 
             physicalButtons.Clear();
@@ -255,9 +270,13 @@ namespace MultiButtonColControl2
         {
             for (int i = 0; i < physicalButtons.Count; ++i)
             {
-                physicalButtons[i].Text = logicalButtons[i + topmostLogicalButton].text;
-                physicalButtons[i].Tag = logicalButtons[i + topmostLogicalButton].tag;
-                physicalButtons[i].BackColor = (currentLogicalButton >= 0 && currentLogicalButton == i + topmostLogicalButton) ? SystemColors.Highlight : buttonBackColor;
+                int logicalButton = i + topmostLogicalButton;
+                var physicalButton = physicalButtons[i];
+                physicalButton.Text = logicalButtons[logicalButton].text;
+                physicalButton.Tag = logicalButtons[logicalButton].tag;
+                physicalButton.BackColor = (currentLogicalButton >= 0 && currentLogicalButton == logicalButton) ? SystemColors.Highlight : buttonBackColor;
+                Adorner.SetBadgeText(physicalButtons[i], (logicalButton + 1).ToString());
+                Adorner.SetBadgeColor(physicalButtons[i], badgeColors[logicalButton % badgeColors.Length]);
             }
         }
 
@@ -325,6 +344,10 @@ namespace MultiButtonColControl2
             for (int i = 0; i < nProposedButtons; ++i)
             {
                 b = new Button();
+                if (this.bShowLogicalButtonNumberBadge)
+                {
+                    Adorner.AddBadgeTo(b, (i + topmostLogicalButton + 1).ToString(), badgeColors[(i + topmostLogicalButton) % badgeColors.Length]);
+                }
                 b.BackColor = buttonBackColor;
                 b.Text = logicalButtons[i + topmostLogicalButton].text;
                 b.Tag = logicalButtons[i + topmostLogicalButton].tag;
@@ -524,6 +547,24 @@ namespace MultiButtonColControl2
             set
             {
                 bShowAlphaButtons = value;
+                redoLayout();
+            }
+        }
+
+        [Browsable(true)]
+        [Category("Appearance")]
+        [Description("Enables/disables the display of a logical button number badge on the button")]
+        public bool ShowLogicalButtonNumberBadge
+        {
+            get
+            {
+                return bShowLogicalButtonNumberBadge;
+            }
+            // Stores the selected value in the private variable colBColor, and 
+            // updates the backcolor of the label control lblDisplay.
+            set
+            {
+                bShowLogicalButtonNumberBadge = value;
                 redoLayout();
             }
         }

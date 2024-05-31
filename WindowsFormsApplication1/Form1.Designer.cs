@@ -82,7 +82,7 @@
             this.lblClicked.Location = new System.Drawing.Point(720, 185);
             this.lblClicked.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblClicked.Name = "lblClicked";
-            this.lblClicked.Size = new System.Drawing.Size(46, 17);
+            this.lblClicked.Size = new System.Drawing.Size(44, 16);
             this.lblClicked.TabIndex = 4;
             this.lblClicked.Text = "label1";
             // 
@@ -92,7 +92,7 @@
             this.lblTag.Location = new System.Drawing.Point(855, 185);
             this.lblTag.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTag.Name = "lblTag";
-            this.lblTag.Size = new System.Drawing.Size(46, 17);
+            this.lblTag.Size = new System.Drawing.Size(44, 16);
             this.lblTag.TabIndex = 5;
             this.lblTag.Text = "label1";
             // 
@@ -105,6 +105,7 @@
             this.multiButtonColControl1.Name = "multiButtonColControl1";
             this.multiButtonColControl1.ShowAlphaButtons = false;
             this.multiButtonColControl1.ShowArrowButtons = true;
+            this.multiButtonColControl1.ShowLogicalButtonNumberBadge = true;
             this.multiButtonColControl1.ShowScrollbar = true;
             this.multiButtonColControl1.Size = new System.Drawing.Size(325, 550);
             this.multiButtonColControl1.TabIndex = 6;
@@ -116,7 +117,7 @@
             this.lblTag2.Location = new System.Drawing.Point(512, 404);
             this.lblTag2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTag2.Name = "lblTag2";
-            this.lblTag2.Size = new System.Drawing.Size(46, 17);
+            this.lblTag2.Size = new System.Drawing.Size(44, 16);
             this.lblTag2.TabIndex = 8;
             this.lblTag2.Text = "label1";
             // 
@@ -126,7 +127,7 @@
             this.lblClicked2.Location = new System.Drawing.Point(377, 404);
             this.lblClicked2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblClicked2.Name = "lblClicked2";
-            this.lblClicked2.Size = new System.Drawing.Size(46, 17);
+            this.lblClicked2.Size = new System.Drawing.Size(44, 16);
             this.lblClicked2.TabIndex = 7;
             this.lblClicked2.Text = "label1";
             // 

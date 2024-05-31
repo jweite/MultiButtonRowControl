@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adorner.cs" />
     <Compile Include="LogicalButton.cs" />
     <Compile Include="MultiButtonColControl.cs">
       <SubType>UserControl</SubType>
