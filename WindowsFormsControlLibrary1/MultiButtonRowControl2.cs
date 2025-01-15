@@ -246,8 +246,8 @@ namespace MultiButtonRowControl2
                 }
             }
 
-            scrollbar.Maximum = logicalButtons.Count - physicalButtons.Count;
             scrollbar.LargeChange = physicalButtons.Count;
+            scrollbar.Maximum = logicalButtons.Count - 1 /* - physicalButtons.Count.  See https://stackoverflow.com/questions/2882789/net-vertical-scrollbar-not-respecting-maximum-property */;
 
         }
 
