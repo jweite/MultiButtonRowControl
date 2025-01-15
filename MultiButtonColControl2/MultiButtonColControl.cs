@@ -153,7 +153,7 @@ namespace MultiButtonColControl2
 
             if (logicalButtonIndex > physicalButtons.Count)
             {
-                scrollbar.Maximum = logicalButtonIndex - 1 /* - physicalButtons.Count*/;
+                scrollbar.Maximum = logicalButtonIndex - physicalButtons.Count;
             }
 
             // Make alpha nav button for this button visibles
@@ -277,6 +277,7 @@ namespace MultiButtonColControl2
                 physicalButton.BackColor = (currentLogicalButton >= 0 && currentLogicalButton == logicalButton) ? SystemColors.Highlight : buttonBackColor;
                 Adorner.SetBadgeText(physicalButtons[i], (logicalButton + 1).ToString());
                 Adorner.SetBadgeColor(physicalButtons[i], badgeColors[logicalButton % badgeColors.Length]);
+                physicalButton.Refresh();
             }
         }
 
@@ -332,7 +333,7 @@ namespace MultiButtonColControl2
 
             if (currentLogicalButton >= 0 && currentLogicalButton >= topmostLogicalButton + nProposedButtons)
             {
-                topmostLogicalButton = (currentLogicalButton - nProposedButtons) + 1;
+                topmostLogicalButton = currentLogicalButton - nProposedButtons;
             }
 
             if (topmostLogicalButton + nProposedButtons > logicalButtons.Count)
@@ -363,10 +364,7 @@ namespace MultiButtonColControl2
                 }
             }
 
-            if (logicalButtonIndex > physicalButtons.Count)
-            {
-                scrollbar.Maximum = logicalButtonIndex - 1 /* - physicalButtons.Count*/;
-            }
+            scrollbar.Maximum = logicalButtons.Count - physicalButtons.Count;
             scrollbar.LargeChange = physicalButtons.Count;
 
             // Resize alpha buttons

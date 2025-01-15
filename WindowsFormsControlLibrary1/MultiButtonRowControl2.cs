@@ -77,7 +77,7 @@ namespace MultiButtonRowControl2
 
             if (logicalButtonIndex > physicalButtons.Count)
             {
-                scrollbar.Maximum = logicalButtonIndex - 1 /* - physicalButtons.Count*/;
+                scrollbar.Maximum = logicalButtonIndex - physicalButtons.Count;
             }
         }
 
@@ -221,7 +221,7 @@ namespace MultiButtonRowControl2
             }
 
             if (currentLogicalButton >= 0 && currentLogicalButton >= leftmostLogicalButton + nProposedButtons) {
-                leftmostLogicalButton = (currentLogicalButton - nProposedButtons) + 1;
+                leftmostLogicalButton = currentLogicalButton - nProposedButtons;
             }
 
             if (leftmostLogicalButton + nProposedButtons > logicalButtons.Count)
@@ -246,10 +246,8 @@ namespace MultiButtonRowControl2
                 }
             }
 
-            if (logicalButtonIndex > physicalButtons.Count)
-            {
-                scrollbar.Maximum = logicalButtonIndex - 1/* - physicalButtons.Count*/;
-            }
+            scrollbar.Maximum = logicalButtons.Count - physicalButtons.Count;
+            scrollbar.LargeChange = physicalButtons.Count;
 
         }
 
