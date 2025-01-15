@@ -40,6 +40,7 @@
             this.btnToggleArrows = new System.Windows.Forms.Button();
             this.btnToggleScrollbar = new System.Windows.Forms.Button();
             this.btnToggleAlpha = new System.Windows.Forms.Button();
+            this.btnAdd100 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -67,7 +68,7 @@
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(434, 223);
+            this.btnClear.Location = new System.Drawing.Point(434, 260);
             this.btnClear.Margin = new System.Windows.Forms.Padding(4);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(141, 28);
@@ -114,7 +115,7 @@
             // lblTag2
             // 
             this.lblTag2.AutoSize = true;
-            this.lblTag2.Location = new System.Drawing.Point(512, 404);
+            this.lblTag2.Location = new System.Drawing.Point(512, 441);
             this.lblTag2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTag2.Name = "lblTag2";
             this.lblTag2.Size = new System.Drawing.Size(44, 16);
@@ -124,7 +125,7 @@
             // lblClicked2
             // 
             this.lblClicked2.AutoSize = true;
-            this.lblClicked2.Location = new System.Drawing.Point(377, 404);
+            this.lblClicked2.Location = new System.Drawing.Point(377, 441);
             this.lblClicked2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblClicked2.Name = "lblClicked2";
             this.lblClicked2.Size = new System.Drawing.Size(44, 16);
@@ -134,7 +135,7 @@
             // btnSelectZero
             // 
             this.btnSelectZero.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSelectZero.Location = new System.Drawing.Point(434, 182);
+            this.btnSelectZero.Location = new System.Drawing.Point(434, 219);
             this.btnSelectZero.Margin = new System.Windows.Forms.Padding(4);
             this.btnSelectZero.Name = "btnSelectZero";
             this.btnSelectZero.Size = new System.Drawing.Size(141, 28);
@@ -145,7 +146,7 @@
             // 
             // btnToggleArrows
             // 
-            this.btnToggleArrows.Location = new System.Drawing.Point(434, 264);
+            this.btnToggleArrows.Location = new System.Drawing.Point(434, 301);
             this.btnToggleArrows.Name = "btnToggleArrows";
             this.btnToggleArrows.Size = new System.Drawing.Size(141, 31);
             this.btnToggleArrows.TabIndex = 10;
@@ -155,7 +156,7 @@
             // 
             // btnToggleScrollbar
             // 
-            this.btnToggleScrollbar.Location = new System.Drawing.Point(434, 308);
+            this.btnToggleScrollbar.Location = new System.Drawing.Point(434, 345);
             this.btnToggleScrollbar.Name = "btnToggleScrollbar";
             this.btnToggleScrollbar.Size = new System.Drawing.Size(141, 31);
             this.btnToggleScrollbar.TabIndex = 11;
@@ -165,7 +166,7 @@
             // 
             // btnToggleAlpha
             // 
-            this.btnToggleAlpha.Location = new System.Drawing.Point(434, 352);
+            this.btnToggleAlpha.Location = new System.Drawing.Point(434, 389);
             this.btnToggleAlpha.Name = "btnToggleAlpha";
             this.btnToggleAlpha.Size = new System.Drawing.Size(141, 31);
             this.btnToggleAlpha.TabIndex = 12;
@@ -173,11 +174,24 @@
             this.btnToggleAlpha.UseVisualStyleBackColor = true;
             this.btnToggleAlpha.Click += new System.EventHandler(this.btnToggleAlpha_Click);
             // 
+            // btnAdd100
+            // 
+            this.btnAdd100.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdd100.Location = new System.Drawing.Point(434, 183);
+            this.btnAdd100.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAdd100.Name = "btnAdd100";
+            this.btnAdd100.Size = new System.Drawing.Size(141, 28);
+            this.btnAdd100.TabIndex = 13;
+            this.btnAdd100.Text = "Add 100";
+            this.btnAdd100.UseVisualStyleBackColor = true;
+            this.btnAdd100.Click += new System.EventHandler(this.btnAdd100_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1713, 642);
+            this.Controls.Add(this.btnAdd100);
             this.Controls.Add(this.btnToggleAlpha);
             this.Controls.Add(this.btnToggleScrollbar);
             this.Controls.Add(this.btnToggleArrows);
@@ -213,6 +227,7 @@
         private System.Windows.Forms.Button btnToggleArrows;
         private System.Windows.Forms.Button btnToggleScrollbar;
         private System.Windows.Forms.Button btnToggleAlpha;
+        private System.Windows.Forms.Button btnAdd100;
     }
 }
 

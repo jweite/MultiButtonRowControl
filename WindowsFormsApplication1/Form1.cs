@@ -68,5 +68,14 @@ namespace WindowsFormsApplication1
         {
             multiButtonColControl1.ShowAlphaButtons = !multiButtonColControl1.ShowAlphaButtons;
         }
+
+        private void btnAdd100_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                multiButtonRowControl1.addButton(String.Format("{0}", buttonNo++), String.Format("Tag {0}", buttonNo));
+                multiButtonColControl1.addButton(String.Format("{0}", buttonNo++), String.Format("Tag {0}", buttonNo));
+            }
+        }
     }
 }
