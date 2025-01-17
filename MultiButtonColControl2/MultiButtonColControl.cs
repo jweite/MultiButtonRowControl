@@ -29,6 +29,11 @@ namespace MultiButtonColControl2
 
         public event EventHandler Click;
 
+        [Browsable(true)]
+        [Category("Action")]
+        [Description("Occurs when component is right-clicked")]
+        public event EventHandler RightClick;
+
         bool bShowArrowButtons = true;
 
         bool bShowScrollbar = true;
@@ -134,6 +139,7 @@ namespace MultiButtonColControl2
                 b.Tag = tag;
                 b.Font = new System.Drawing.Font("Microsoft Sans Serif", fontSize, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                 b.Click += new System.EventHandler(this.button_Click);
+                b.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
                 physicalButtons.Add(b);
                 flpInner.Controls.Add(b);
 
@@ -185,6 +191,7 @@ namespace MultiButtonColControl2
             foreach (Button b in physicalButtons)
             {
                 b.Click -= this.button_Click;
+                b.MouseUp -= this.button_MouseUp;
                 Adorner.RemoveBadgeFrom(b);
             }
 
@@ -356,6 +363,7 @@ namespace MultiButtonColControl2
                 b.Height = proposedButtonHeight;
                 b.Width = flpInner.Width - (flpInner.Margin.Left + flpInner.Margin.Right);
                 b.Click += new System.EventHandler(this.button_Click);
+                b.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
                 physicalButtons.Add(b);
                 flpInner.Controls.Add(b);
                 if (currentLogicalButton >= 0 && i + topmostLogicalButton == currentLogicalButton)
@@ -404,6 +412,14 @@ namespace MultiButtonColControl2
             if (Click != null)
             {
                 Click(sender, e);
+            }
+        }
+
+        private void button_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right && RightClick != null)
+            {
+                RightClick(sender, e);
             }
         }
 

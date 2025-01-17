@@ -77,5 +77,10 @@ namespace WindowsFormsApplication1
                 multiButtonColControl1.addButton(String.Format("{0}", buttonNo++), String.Format("Tag {0}", buttonNo));
             }
         }
+
+        private void multiButtonColControl1_RightClick(object sender, EventArgs e)
+        {
+            MessageBox.Show("Right click: " + ((Button)sender).Text);
+        }
     }
 }

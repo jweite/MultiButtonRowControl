@@ -33,7 +33,6 @@
             this.btnClear = new System.Windows.Forms.Button();
             this.lblClicked = new System.Windows.Forms.Label();
             this.lblTag = new System.Windows.Forms.Label();
-            this.multiButtonColControl1 = new MultiButtonColControl2.MultiButtonColControl();
             this.lblTag2 = new System.Windows.Forms.Label();
             this.lblClicked2 = new System.Windows.Forms.Label();
             this.btnSelectZero = new System.Windows.Forms.Button();
@@ -41,6 +40,7 @@
             this.btnToggleScrollbar = new System.Windows.Forms.Button();
             this.btnToggleAlpha = new System.Windows.Forms.Button();
             this.btnAdd100 = new System.Windows.Forms.Button();
+            this.multiButtonColControl1 = new MultiButtonColControl2.MultiButtonColControl();
             this.SuspendLayout();
             // 
             // button1
@@ -96,21 +96,6 @@
             this.lblTag.Size = new System.Drawing.Size(44, 16);
             this.lblTag.TabIndex = 5;
             this.lblTag.Text = "label1";
-            // 
-            // multiButtonColControl1
-            // 
-            this.multiButtonColControl1.ButtonBackColor = System.Drawing.Color.Maroon;
-            this.multiButtonColControl1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.multiButtonColControl1.Location = new System.Drawing.Point(0, 92);
-            this.multiButtonColControl1.Margin = new System.Windows.Forms.Padding(5);
-            this.multiButtonColControl1.Name = "multiButtonColControl1";
-            this.multiButtonColControl1.ShowAlphaButtons = false;
-            this.multiButtonColControl1.ShowArrowButtons = true;
-            this.multiButtonColControl1.ShowLogicalButtonNumberBadge = true;
-            this.multiButtonColControl1.ShowScrollbar = true;
-            this.multiButtonColControl1.Size = new System.Drawing.Size(325, 550);
-            this.multiButtonColControl1.TabIndex = 6;
-            this.multiButtonColControl1.Click += new System.EventHandler(this.multiButtonColControl1_Click);
             // 
             // lblTag2
             // 
@@ -185,6 +170,22 @@
             this.btnAdd100.Text = "Add 100";
             this.btnAdd100.UseVisualStyleBackColor = true;
             this.btnAdd100.Click += new System.EventHandler(this.btnAdd100_Click);
+            // 
+            // multiButtonColControl1
+            // 
+            this.multiButtonColControl1.ButtonBackColor = System.Drawing.Color.Maroon;
+            this.multiButtonColControl1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.multiButtonColControl1.Location = new System.Drawing.Point(0, 92);
+            this.multiButtonColControl1.Margin = new System.Windows.Forms.Padding(5);
+            this.multiButtonColControl1.Name = "multiButtonColControl1";
+            this.multiButtonColControl1.ShowAlphaButtons = false;
+            this.multiButtonColControl1.ShowArrowButtons = true;
+            this.multiButtonColControl1.ShowLogicalButtonNumberBadge = true;
+            this.multiButtonColControl1.ShowScrollbar = true;
+            this.multiButtonColControl1.Size = new System.Drawing.Size(325, 550);
+            this.multiButtonColControl1.TabIndex = 6;
+            this.multiButtonColControl1.Click += new System.EventHandler(this.multiButtonColControl1_Click);
+            this.multiButtonColControl1.RightClick += new System.EventHandler(this.multiButtonColControl1_RightClick);
             // 
             // Form1
             // 
